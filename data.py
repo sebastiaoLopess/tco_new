@@ -37,7 +37,7 @@ def consulta_auto_avaliar(placa,empresa):
     return avaliacao
 
 def consulta_estoque(placa):
-    url = 'https://255d-200-194-101-215.ngrok-free.app'
+    url = 'https://c8b8-200-194-101-215.ngrok-free.app'
     response = requests.get(url, params={'placa': placa})
     data = response.json()
     return data
