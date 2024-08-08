@@ -58,7 +58,7 @@ if button:
         dados_da_avaliacao(avaliacao,classificacao)
     with col4:
 
-        st.subheader("REFERÊNCIAS DE GARANTIA",divider="gray")
+        st.subheader("DADOS DE GARANTIA",divider="gray")
 
         referencias_garantia(avaliacao,classificacao)
 
