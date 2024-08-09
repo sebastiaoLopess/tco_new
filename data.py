@@ -45,11 +45,14 @@ def consulta_estoque(placa):
 def trata_estoque(data):
     json_data = json.loads(data)
     df = pd.DataFrame.from_records(json_data)
-    df.set_index('ve_placa')
-    df['me_dtent'] = pd.to_datetime(df['me_dtent'], unit='ms').dt.strftime('%d/%m/%Y')
-    df['me_dtsai'] = pd.to_datetime(df['me_dtsai'], unit='ms').dt.strftime('%d/%m/%Y')
-    columns = ['ve_placa','mod_ds','est_ds','me_dtent','me_dtsai']
-    df = df[columns].sort_values(by='me_dtsai',ascending=True)
+    if df.empty:
+        df = df
+    else:
+        df.set_index('ve_placa')
+        df['me_dtent'] = pd.to_datetime(df['me_dtent'], unit='ms').dt.strftime('%d/%m/%Y')
+        df['me_dtsai'] = pd.to_datetime(df['me_dtsai'], unit='ms').dt.strftime('%d/%m/%Y')
+        columns = ['ve_placa','mod_ds','est_ds','me_dtent','me_dtsai']
+        df = df[columns].sort_values(by='me_dtsai',ascending=True)
     return df
 
 def trata_data(dt_aval):
