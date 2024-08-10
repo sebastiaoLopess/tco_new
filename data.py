@@ -6,13 +6,27 @@ import json
 import datetime
 from datetime import date
 
+def gera_token():
+    url = 'https://apps-luke-dot-autoavaliar-apps.appspot.com/ego/syncService/refreshToken'
+    headers = {
+        'Content-Type': 'application/json',  # Tipo de conteúdo
+        "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcHBzLmF1dG9hdmFsaWFyLmNvbS5iciIsImlhdCI6MTcxNjkxNTcxNywianRpIjoiNDlkMGM1NWM3YmMxZjVmYWIzNzU0MDA2OTY2ODdlYWQ3YjZjMzE0NyIsIm5iZiI6MTcxNjkxNTcxNywiZXhwIjoxNzQ4MDIwMzY3LCJkYXRhIjp7ImNvdW50cnlfaWQiOiI3NiIsImluc3RhbmNlX2lkIjoiMTMyNDkxIiwidG9rZW5faWQiOjE3OTI1OTY5OSwidHlwZSI6InJlZnJlc2gifX0.kCAJIwuT2KQ-6ZGGMAD6oMTRqcXbw-cvDOMGpxa5zZg"
+    }
+
+    response = requests.post(url, headers=headers)
+    data = response.json()
+    token = data['data']['token']
+
+    return token
 
 def consulta_auto_avaliar(placa,empresa):
+
+    token = gera_token()
 
     url = 'https://apps-luke-dot-autoavaliar-apps.appspot.com//usbi/syncService/getValuation'  # Substitua pela URL do endpoint
     headers = {
         'Content-Type': 'application/json',  # Tipo de conteúdo
-        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcHBzLWx1a2UtZG90LWF1dG9hdmFsaWFyLWFwcHMuYXBwc3BvdC5jb20iLCJpYXQiOjE3MjMyMjUxNzYsImp0aSI6IjgyN2Y3YzJhM2NhOWQzNjllYjQ0OGUyMzE3Yjg1ZjEyNzQ4NDJhMGMiLCJuYmYiOjE3MjMyMjUxNzYsImV4cCI6MTcyMzMxMTU3NiwiZGF0YSI6eyJjb3VudHJ5X2lkIjoiNzYiLCJpbnN0YW5jZV9pZCI6IjEzMjQ5MSIsInRva2VuX2lkIjoxODk3NjU1NDAsInR5cGUiOiJhdXRob3JpemF0aW9uIn19.qOAyNqXh5t2tV91gYq1h8TqfAlTahLYXqbWZioQtYZE",  # Cabeçalho de autorização, se necessário
+        "token": token,  # Cabeçalho de autorização, se necessário
         "signature": "9587915e-367335b4-e286dbc4-35585857-db78c0c5"
     }
 
