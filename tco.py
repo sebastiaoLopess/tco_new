@@ -5,7 +5,7 @@ import pandas as pd
 import json
 from components import input 
 from data import consulta_auto_avaliar,consulta_estoque,trata_estoque,ano_garantia,tem_garantia,resposta,trata_data
-from paginas import dados_da_avaliacao,referencias_garantia,referencias
+from paginas import dados_da_avaliacao,referencias_garantia, referencias, itens_avaliados
 
 
 opcoes = {
@@ -65,6 +65,11 @@ if button:
     st.subheader("REFERÊNCIAS",divider="gray")
 
     referencias(avaliacao,classificacao)
+
+    st.subheader("ITENS AVALIADOS",divider="gray")
+
+    itens_avaliados(avaliacao)
+
 
     #st.subheader("MOVIMENTAÇÃO ESTOQUE",divider="gray")
     #st.table(df_estoque)

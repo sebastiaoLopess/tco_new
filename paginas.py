@@ -4,7 +4,7 @@ import streamlit.components.v1 as components
 import pandas as pd
 import json
 from components import input 
-from data import consulta_auto_avaliar,consulta_estoque,trata_estoque,ano_garantia,tem_garantia,resposta,trata_data
+from data import consulta_auto_avaliar,consulta_estoque,trata_estoque,ano_garantia,tem_garantia,resposta,trata_data,referencias_media,referencias_min,referencias_max,trata_itens
 
 def dados_da_avaliacao(avaliacao,classificacao):
 
@@ -75,10 +75,43 @@ def referencias(avaliacao,classificacao):
         custo = avaliacao['valuation_value'] + avaliacao['expenses_value']
         st.markdown(input("Custo",value=custo),unsafe_allow_html=True)
 
-    col5, col6, col7, col8 = st.columns(4)
+    col5, col6 = st.columns(2)
     with col5:
-        st.markdown(input("Compra Fortaleza",value=avaliacao['valuation_value']),unsafe_allow_html=True)
+        st.markdown(input("Fipe",value=avaliacao['fipe_value']),unsafe_allow_html=True)
     with col6:
-        st.markdown(input("Compra CE",value=avaliacao['expenses_value']),unsafe_allow_html=True)
+        percent_fipe = (custo / avaliacao['fipe_value'])*100
+        st.markdown(input("% fipe",value=f"{int(percent_fipe)} %"),unsafe_allow_html=True)
+
+    col7, col8, col9, col10 = st.columns(4)
     with col7:
-        st.markdown(input("Compra Brasil",value=avaliacao['top_dealer']),unsafe_allow_html=True)
+        st.markdown(input("Compra Fortaleza",value=referencias_media(avaliacao['references'],2)),unsafe_allow_html=True)
+    with col8:
+        st.markdown(input("Compra CE",value=referencias_max(avaliacao['references'],2)),unsafe_allow_html=True)
+    with col9:
+        st.markdown(input("Compra Brasil",value=referencias_min(avaliacao['references'],2)),unsafe_allow_html=True)
+
+    col11, col12, col13, col14 = st.columns(4)
+    with col11:
+        st.markdown(input("B2B Fortaleza",value=referencias_media(avaliacao['references'],8)),unsafe_allow_html=True)
+    with col12:
+        st.markdown(input("B2B Ceara",value=referencias_max(avaliacao['references'],8)),unsafe_allow_html=True)
+    with col13:
+        st.markdown(input("B2B Brasil",value=referencias_min(avaliacao['references'],8)),unsafe_allow_html=True)
+
+    col15, col16, col17, col18 = st.columns(4)
+    with col15:
+        st.markdown(input("B2C Fortaleza",value=referencias_media(avaliacao['references'],7)),unsafe_allow_html=True)
+    with col16:
+        st.markdown(input("B2C Ceara",value=referencias_max(avaliacao['references'],7)),unsafe_allow_html=True)
+    with col17:
+        st.markdown(input("B2C Brasil",value=referencias_min(avaliacao['references'],7)),unsafe_allow_html=True)
+
+    st.markdown(input("WEB MOTORS",value=referencias_min(avaliacao['references'],1)),unsafe_allow_html=True)
+
+    st.markdown(input("Sugestao de Venda",value=avaliacao['proposed_value']),unsafe_allow_html=True)
+
+    st.markdown(input("Expectativa do Cliente",value=avaliacao['expected_value']),unsafe_allow_html=True)
+
+def itens_avaliados(avaliacao):
+
+    st.table(trata_itens(avaliacao['items']))
