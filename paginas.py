@@ -34,11 +34,13 @@ def dados_da_avaliacao(avaliacao,classificacao):
         st.markdown(input("Avaliador",value=avaliacao['valuer']['name']),unsafe_allow_html=True)
     with col8:
         st.markdown(input("Vendedor",value=avaliacao['user']['name']),unsafe_allow_html=True)
-    col9, col10 = st.columns(2)
+    col9, col10, col11 = st.columns(3)
     with col9:
         st.markdown(input("Cor",value=avaliacao['vehicle']['color']['name']),unsafe_allow_html=True)
     with col10:
         st.markdown(input("Combustivel",value=avaliacao['vehicle']['fuel']['name']),unsafe_allow_html=True)
+    with col11:
+        st.markdown(input("Transmissão",value=avaliacao['vehicle']['transmission']['name']),unsafe_allow_html=True)
 
 def referencias_garantia(avaliacao,classificacao):
 
