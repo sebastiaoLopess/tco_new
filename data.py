@@ -26,7 +26,7 @@ def consulta_auto_avaliar(placa,empresa):
     url = 'https://apps-luke-dot-autoavaliar-apps.appspot.com//usbi/syncService/getValuation'  # Substitua pela URL do endpoint
     headers = {
         'Content-Type': 'application/json',  # Tipo de conteúdo
-        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcHBzLWx1a2UtZG90LWF1dG9hdmFsaWFyLWFwcHMuYXBwc3BvdC5jb20iLCJpYXQiOjE3MjM2NTYxNTQsImp0aSI6IjgyN2Y3YzJhM2NhOWQzNjllYjQ0OGUyMzE3Yjg1ZjEyNzQ4NDJhMGMiLCJuYmYiOjE3MjM2NTYxNTQsImV4cCI6MTcyMzc0MjU1NCwiZGF0YSI6eyJjb3VudHJ5X2lkIjoiNzYiLCJpbnN0YW5jZV9pZCI6IjEzMjQ5MSIsInRva2VuX2lkIjoxOTA0MzUxMTAsInR5cGUiOiJhdXRob3JpemF0aW9uIn19.yIL7AG_zrOocIm02rKljiM42V4fLpOv6bP-B4l1T3mQ",  # Cabeçalho de autorização, se necessário
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcHBzLWx1a2UtZG90LWF1dG9hdmFsaWFyLWFwcHMuYXBwc3BvdC5jb20iLCJpYXQiOjE3MjM3NzEwOTcsImp0aSI6IjgyN2Y3YzJhM2NhOWQzNjllYjQ0OGUyMzE3Yjg1ZjEyNzQ4NDJhMGMiLCJuYmYiOjE3MjM3NzEwOTcsImV4cCI6MTcyMzg1NzQ5NywiZGF0YSI6eyJjb3VudHJ5X2lkIjoiNzYiLCJpbnN0YW5jZV9pZCI6IjEzMjQ5MSIsInRva2VuX2lkIjoxOTA2NzkzMjIsInR5cGUiOiJhdXRob3JpemF0aW9uIn19.xHdYZ-lP1p__G4ESNL9HMrLeb9BQvjRQsJoFwbnWOXg",  # Cabeçalho de autorização, se necessário
         "signature": "9587915e-367335b4-e286dbc4-35585857-db78c0c5"
     }
 
