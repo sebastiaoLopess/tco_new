@@ -125,7 +125,7 @@ def trata_estoque(data):
     return df
 
 def trata_data(dt_aval):
-    data = datetime.datetime.fromtimestamp(dt_aval)
+    data = datetime.fromtimestamp(dt_aval)
     nova_data = data.strftime('%d/%m/%Y')
     return nova_data
 
