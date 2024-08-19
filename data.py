@@ -4,7 +4,8 @@ import streamlit.components.v1 as components
 import pandas as pd
 import json
 import datetime
-from datetime import date
+from datetime import date,datetime
+import pickle
 
 def gera_token():
     url = 'https://apps-luke-dot-autoavaliar-apps.appspot.com/ego/syncService/refreshToken'
@@ -16,6 +17,15 @@ def gera_token():
     response = requests.post(url, headers=headers)
     data = response.json()
     token = data['data']['token']
+    expires_in = data['data']['expires_in']
+
+    meu_dict = {
+        'expires_in': expires_in,
+        'token': token
+    }
+
+    with open('historico_token.pickle', 'wb') as f:
+        pickle.dump(meu_dict, f)
 
     return token
 
@@ -26,7 +36,7 @@ def consulta_auto_avaliar(placa,empresa):
     url = 'https://apps-luke-dot-autoavaliar-apps.appspot.com//usbi/syncService/getValuation'  # Substitua pela URL do endpoint
     headers = {
         'Content-Type': 'application/json',  # Tipo de conteúdo
-        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcHBzLWx1a2UtZG90LWF1dG9hdmFsaWFyLWFwcHMuYXBwc3BvdC5jb20iLCJpYXQiOjE3MjM2NTYxNTQsImp0aSI6IjgyN2Y3YzJhM2NhOWQzNjllYjQ0OGUyMzE3Yjg1ZjEyNzQ4NDJhMGMiLCJuYmYiOjE3MjM2NTYxNTQsImV4cCI6MTcyMzc0MjU1NCwiZGF0YSI6eyJjb3VudHJ5X2lkIjoiNzYiLCJpbnN0YW5jZV9pZCI6IjEzMjQ5MSIsInRva2VuX2lkIjoxOTA0MzUxMTAsInR5cGUiOiJhdXRob3JpemF0aW9uIn19.yIL7AG_zrOocIm02rKljiM42V4fLpOv6bP-B4l1T3mQ",  # Cabeçalho de autorização, se necessário
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcHBzLWx1a2UtZG90LWF1dG9hdmFsaWFyLWFwcHMuYXBwc3BvdC5jb20iLCJpYXQiOjE3MjM3NzEwOTcsImp0aSI6IjgyN2Y3YzJhM2NhOWQzNjllYjQ0OGUyMzE3Yjg1ZjEyNzQ4NDJhMGMiLCJuYmYiOjE3MjM3NzEwOTcsImV4cCI6MTcyMzg1NzQ5NywiZGF0YSI6eyJjb3VudHJ5X2lkIjoiNzYiLCJpbnN0YW5jZV9pZCI6IjEzMjQ5MSIsInRva2VuX2lkIjoxOTA2NzkzMjIsInR5cGUiOiJhdXRob3JpemF0aW9uIn19.xHdYZ-lP1p__G4ESNL9HMrLeb9BQvjRQsJoFwbnWOXg",  # Cabeçalho de autorização, se necessário
         "signature": "9587915e-367335b4-e286dbc4-35585857-db78c0c5"
     }
 
@@ -45,10 +55,23 @@ def consulta_auto_avaliar(placa,empresa):
     }
 
     response = requests.post(url, headers=headers, json=body)
-    data = response.json()
-    avaliacao = data['data']
 
-    return avaliacao
+    if response.status_code == 200:
+        try:
+            # Tente decodificar a resposta como JSON
+            data = response.json()
+            avaliacao = data['data']
+            return avaliacao
+        except requests.exceptions.JSONDecodeError:
+            print("Erro ao decodificar a resposta JSON. Resposta não está em formato JSON.")
+            print(f"Conteúdo da resposta: {response.text}")
+            return None
+    else:
+        print(f"Erro na requisição: {response.status_code}")
+        print(response.status_code)
+        return response.status_code
+
+
 
 def consulta_estoque(placa):
     url = 'https://c8b8-200-194-101-215.ngrok-free.app'
@@ -76,12 +99,20 @@ def trata_data(dt_aval):
 
 def ano_garantia(marca):
     tab_garantia = pd.read_csv('tab_garantia.csv',sep=';',index_col = 'marca')
-    garantia = tab_garantia.loc[marca,'garantia']
+    try:
+        garantia = tab_garantia.loc[marca,'garantia']
+    except KeyError:
+        garantia = 0
     return garantia
 
 def tem_garantia(marca,ano_modelo):
     tab_garantia = pd.read_csv('tab_garantia.csv',sep=';',index_col = 'marca')
-    garantia = tab_garantia.loc[marca,'garantia']
+
+    try:
+        garantia = tab_garantia.loc[marca,'garantia']
+    except KeyError:
+        garantia = 0
+
     ano_atual = date.today().year
     ano_garantia = ano_modelo + garantia
     prazo_garantia = ano_garantia - ano_atual
@@ -136,3 +167,40 @@ def trata_itens(data):
         df = df[columns]
         df.rename(columns={'name': 'Item', 'obs': 'Obs','expenses_value': 'Valor Despesa'},inplace=True)
     return df
+
+
+def atualiza_token():
+    with open('historico_token.pickle', 'rb') as f:
+        meu_dict = pickle.load(f)
+        data_exp = meu_dict['expires_in']
+        dt_split = data_exp.split()[0]
+        data_expiracao = datetime.strptime(dt_split, "%Y-%m-%d")
+
+
+    data_hoje = date.today()
+    hoje = datetime.combine(data_hoje, datetime.min.time())
+
+    check_data = hoje < data_expiracao
+
+    token = ''
+
+    if check_data:
+        token = meu_dict['token']
+        print("verdadeiro")
+        print(meu_dict)
+    
+    else:
+        token = gera_token()
+        print("falso")
+        with open('historico_token.pickle', 'rb') as f:
+            meu_dict = pickle.load(f)
+            data_exp = meu_dict['expires_in']
+            dt_split = data_exp.split()[0]
+            data_expiracao = datetime.strptime(dt_split, "%Y-%m-%d")
+        print(meu_dict)
+    
+    return token
+
+
+dict = atualiza_token()
+print(dict)

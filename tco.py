@@ -48,7 +48,9 @@ emp_selecionada = opcoes[empresa]
 button = st.button("Gerar TCO", type="primary")
 
 if button:
+
     avaliacao = consulta_auto_avaliar(placa,emp_selecionada)
+
     #estoque = consulta_estoque(placa)
     #df_estoque = trata_estoque(estoque)
     col3, col4 = st.columns(2)

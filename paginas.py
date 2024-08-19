@@ -16,7 +16,7 @@ def dados_da_avaliacao(avaliacao,classificacao):
     with col1:
         st.markdown(input("KM",value=avaliacao['vehicle']['mileage']),unsafe_allow_html=True)
     with col2:
-        st.markdown(input("Ano Fabricação",value=avaliacao['vehicle']['year']),unsafe_allow_html=True)
+        st.markdown(input("Ano Modelo",value=avaliacao['vehicle']['year']),unsafe_allow_html=True)
 
 
     col3, col4 = st.columns(2)
