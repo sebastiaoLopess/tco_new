@@ -179,6 +179,8 @@ def referencias_min(references,id_reference):
         if reference['id'] == id_reference:
             resposta = reference['min_value']
             break
+    else:
+        resposta = 0
     return resposta
 
 

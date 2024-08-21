@@ -28,7 +28,7 @@ def dados_da_avaliacao(avaliacao,classificacao):
     with col5:
         st.markdown(input("Tipo de Avaliação",value=avaliacao['valuation_type_name']),unsafe_allow_html=True)
     with col6:
-        st.markdown(input("Municipio Vec",value=avaliacao['vehicle']['city']),unsafe_allow_html=True)
+        st.markdown(input("Municipio Vec",value=avaliacao.get('vehicle', {}).get('city', '')),unsafe_allow_html=True)
     col7, col8 = st.columns(2)
     with col7:
         st.markdown(input("Avaliador",value=avaliacao['valuer']['name']),unsafe_allow_html=True)
