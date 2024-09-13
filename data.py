@@ -6,6 +6,7 @@ import json
 import datetime
 from datetime import date,datetime
 import pickle
+import re
 
 def gera_token():
     url = 'https://apps-luke-dot-autoavaliar-apps.appspot.com/ego/syncService/refreshToken'
@@ -201,3 +202,17 @@ def trata_itens(data):
         df = df[columns]
         df.rename(columns={'name': 'Item', 'obs': 'Obs','expenses_value': 'Valor Despesa'},inplace=True)
     return df
+
+def define_placa(placa):
+    
+    quinto_carac = placa[4].lower()
+    placa_azul = re.findall("[a-z]", quinto_carac)
+    placa_cinza = re.findall("[0-9]", quinto_carac)
+    modelo_placa = ""
+
+    if placa_azul:
+        modelo_placa = "PLACA AZUL"
+    else:
+        modelo_placa = "PLACA CINZA"
+
+    return modelo_placa
