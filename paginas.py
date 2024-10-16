@@ -41,6 +41,7 @@ def dados_da_avaliacao(avaliacao,classificacao):
         st.markdown(input("Combustivel",value=avaliacao['vehicle']['fuel']['name']),unsafe_allow_html=True)
     with col11:
         st.markdown(input("Transmissão",value=avaliacao['vehicle']['transmission']['name']),unsafe_allow_html=True)
+    st.markdown(input("Data Avaliação",trata_data(avaliacao['valuation_date'])),unsafe_allow_html=True)
 
 def referencias_garantia(avaliacao,classificacao):
 
