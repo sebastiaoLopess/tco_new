@@ -34,10 +34,60 @@ classificacao = {
       int(5): "E"
 }
 
+cod_auth = [
+            7582,
+            4218,
+            7735,
+            6045,
+            1079,
+            5139,
+            9099,
+            4529,
+            1707,
+            6577,
+            1631,
+            8063,
+            9456,
+            7687,
+            2274,
+            6882,
+            3604,
+            6334,
+            2094,
+            5031,
+            5516,
+            7343,
+            3059,
+            9369,
+            8184,
+            4197,
+            3578,
+            5711,
+            1350,
+            1292,
+            9595,
+            1982,
+            2204,
+            6263,
+            6111,
+            6010,
+            6498,
+            7898,
+            9713,
+            8431,
+            4927,
+            6382
+            ]
+
 empresas = list(opcoes.keys())
 
 st.header("TCO CARMAIS", divider="gray")
-placa = st.text_input("Placa")
+col1, col2 = st.columns(2)
+with col1:
+    placa = st.text_input("Placa")
+with col2:
+    autenticator = st.text_input("Autenticador")
+
 empresa = st.selectbox(
     "Empresa",
     empresas
@@ -47,7 +97,7 @@ emp_selecionada = opcoes[empresa]
 
 button = st.button("Gerar TCO", type="primary")
 
-if button:
+if button and autenticator in str(cod_auth):
 
     avaliacao = consulta_auto_avaliar(placa,emp_selecionada)
 
