@@ -68,7 +68,7 @@ cod_auth = [
             9595,
             1982,
             2204,
-            6263,
+            7962,
             6111,
             6010,
             6498,
@@ -86,7 +86,7 @@ col1, col2 = st.columns(2)
 with col1:
     placa = st.text_input("Placa")
 with col2:
-    autenticator = st.text_input("Autenticador")
+    autenticator = st.text_input("Autenticador",type="password")
 
 empresa = st.selectbox(
     "Empresa",
