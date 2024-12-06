@@ -98,7 +98,7 @@ emp_selecionada = opcoes[empresa]
 
 button = st.button("Gerar TCO", type="primary")
 
-if button and autenticator in str(cod_auth):
+if button and autenticator in str(cod_auth) and autenticator:
 
     avaliacao = consulta_auto_avaliar(placa,emp_selecionada)
 
