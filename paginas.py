@@ -8,7 +8,7 @@ from data import consulta_auto_avaliar,consulta_estoque,trata_estoque,ano_garant
 
 def dados_da_avaliacao(avaliacao,classificacao):
 
-    #st.markdown(input("Data Avaliação",trata_data(avaliacao['valuation_date'])),unsafe_allow_html=True)
+    st.markdown(input("Data Avaliação",trata_data(avaliacao['valuation_date'])),unsafe_allow_html=True)
     st.markdown(input("Veiculo Avaliado",avaliacao['vehicle']['model']['name'] + " " + avaliacao['vehicle']['version']['name']),unsafe_allow_html=True)
     st.markdown(input("Veiculo de Interesse",value=avaliacao['interested_vehicle']),unsafe_allow_html=True)
     
