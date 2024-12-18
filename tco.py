@@ -77,7 +77,9 @@ cod_auth = [
             8431,
             4927,
             6382,
-            4621
+            4621,
+            7891,
+            9149
             ]
 
 empresas = list(opcoes.keys())
