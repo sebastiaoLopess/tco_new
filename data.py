@@ -12,7 +12,7 @@ def gera_token():
     url = 'https://apps-luke-dot-autoavaliar-apps.appspot.com/ego/syncService/refreshToken'
     headers = {
         'Content-Type': 'application/json',  # Tipo de conteúdo
-        "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcHBzLmF1dG9hdmFsaWFyLmNvbS5iciIsImlhdCI6MTcxNjkxNTcxNywianRpIjoiNDlkMGM1NWM3YmMxZjVmYWIzNzU0MDA2OTY2ODdlYWQ3YjZjMzE0NyIsIm5iZiI6MTcxNjkxNTcxNywiZXhwIjoxNzQ4MDIwMzY3LCJkYXRhIjp7ImNvdW50cnlfaWQiOiI3NiIsImluc3RhbmNlX2lkIjoiMTMyNDkxIiwidG9rZW5faWQiOjE3OTI1OTY5OSwidHlwZSI6InJlZnJlc2gifX0.kCAJIwuT2KQ-6ZGGMAD6oMTRqcXbw-cvDOMGpxa5zZg"
+        "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcHBzLWx1a2UtZG90LWF1dG9hdmFsaWFyLWFwcHMuYXBwc3BvdC5jb20iLCJpYXQiOjE3NDI3NTc2NDQsImp0aSI6IjgyN2Y3YzJhM2NhOWQzNjllYjQ0OGUyMzE3Yjg1ZjEyNzQ4NDJhMGMiLCJuYmYiOjE3NDI3NTc2NDQsImV4cCI6MTc3Mzg2MjI5NCwiZGF0YSI6eyJjb3VudHJ5X2lkIjoiNzYiLCJpbnN0YW5jZV9pZCI6MTMyNDkxLCJ0b2tlbl9pZCI6MjIyNjg2ODU1LCJ0eXBlIjoicmVmcmVzaCJ9fQ.7CVQO3Po3h7XrwjtpeL5h0R64_51-NtauTzm--e7BPE"
     }
 
     response = requests.post(url, headers=headers)
