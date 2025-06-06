@@ -4,7 +4,7 @@ import streamlit.components.v1 as components
 import pandas as pd
 import json
 from components import input 
-from data import consulta_auto_avaliar,consulta_estoque,trata_estoque,ano_garantia,tem_garantia,resposta,trata_data
+from data import consulta_auto_avaliar,consulta_estoque,trata_estoque,ano_garantia,tem_garantia,resposta,trata_data,consulta_revisao
 from paginas import dados_da_avaliacao,referencias_garantia, referencias, itens_avaliados
 
 
@@ -104,6 +104,9 @@ if button and autenticator in str(cod_auth) and autenticator:
 
     avaliacao = consulta_auto_avaliar(placa,emp_selecionada)
 
+    revisoes = consulta_revisao(placa)
+
+
     #estoque = consulta_estoque(placa)
     #df_estoque = trata_estoque(estoque)
     col3, col4 = st.columns(2)
@@ -124,6 +127,9 @@ if button and autenticator in str(cod_auth) and autenticator:
     st.subheader("ITENS AVALIADOS",divider="gray")
 
     itens_avaliados(avaliacao)
+
+    st.subheader("REVISÕES",divider="gray")
+    st.dataframe(revisoes)
 
 
     #st.subheader("MOVIMENTAÇÃO ESTOQUE",divider="gray")
