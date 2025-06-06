@@ -220,15 +220,28 @@ def define_placa(placa):
 def consulta_revisao(placa):
     url = 'http://200.194.101.205:8000/consultarevisao'
     response = requests.get(url, params={'ve_placa': placa})
-    data = response.json()
-    df_revisoes = pd.DataFrame(data)
+    try:
+        data = response.json()
 
-    # Converte timestamp (milissegundos) para data legível
-    df_revisoes['os_dtaber'] = pd.to_datetime(df_revisoes['os_dtaber'], unit='ms')
+        # Se não houver dados, retorna DataFrame vazio com as colunas esperadas
+        if not data:
+            return pd.DataFrame(columns=['os_dtaber', 'os_km', 'tm_ds', 'os_nr'])
 
-    # Remove espaços em branco
-    df_revisoes['tm_cd'] = df_revisoes['tm_cd'].str.strip()
-    df_revisoes['ve_placa'] = df_revisoes['ve_placa'].str.strip()
-    cols = ['os_dtaber','os_km','tm_ds','os_nr']
-    df_revisoes = df_revisoes[cols]
-    return df_revisoes
+        df_revisoes = pd.DataFrame(data)
+
+        # Converte timestamp (milissegundos) para data legível
+        df_revisoes['os_dtaber'] = pd.to_datetime(df_revisoes['os_dtaber'], unit='ms', errors='coerce')
+
+        # Remove espaços em branco
+        df_revisoes['tm_cd'] = df_revisoes['tm_cd'].str.strip()
+        df_revisoes['ve_placa'] = df_revisoes['ve_placa'].str.strip()
+
+        # Seleciona as colunas desejadas
+        cols = ['os_dtaber', 'os_km', 'tm_ds', 'os_nr']
+        df_revisoes = df_revisoes[cols]
+
+        return df_revisoes
+
+    except Exception as e:
+        print(f"Erro ao consultar revisão: {e}")
+        return pd.DataFrame(columns=['os_dtaber', 'os_km', 'tm_ds', 'os_nr'])
