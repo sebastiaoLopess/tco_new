@@ -23,7 +23,10 @@ opcoes = {
       "Nossa Moto": "101204600",
       "BYD Teresina": "101212127",
       "BYD Natal": "101212126",
-      "GWM SLZ": "101212128"      
+      "GWM SLZ": "101212128",
+      "NOSSAMOTO BATURITE": "101247207",
+      "NOSSAMOTO CONJUNTO CEARA": "101247174",
+      "NOSSAMOTO SIQUEIRA": "101247183"      
 }
 
 classificacao = {
