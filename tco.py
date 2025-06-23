@@ -20,7 +20,7 @@ opcoes = {
       "Honda WS": "101204684",
       "Honda SD": "101204686",
       "Honda SUL": "101204687",
-      "Nossa Moto": "101204600",
+      "NOSSAMOTO - HONDA": "101204688",
       "BYD Teresina": "101212127",
       "BYD Natal": "101212126",
       "GWM SLZ": "101212128",
