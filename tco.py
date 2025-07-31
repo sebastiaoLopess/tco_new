@@ -137,7 +137,7 @@ if button and autenticator in str(cod_auth) and autenticator:
 
     avaliacao = consulta_auto_avaliar(placa,emp_selecionada)
 
-    revisoes = consulta_revisao(placa)
+    #revisoes = consulta_revisao(placa)
 
 
     #estoque = consulta_estoque(placa)
@@ -161,8 +161,8 @@ if button and autenticator in str(cod_auth) and autenticator:
 
     itens_avaliados(avaliacao)
 
-    st.subheader("REVISÕES",divider="gray")
-    st.dataframe(revisoes)
+    #st.subheader("REVISÕES",divider="gray")
+    #st.dataframe(revisoes)
 
 
     #st.subheader("MOVIMENTAÇÃO ESTOQUE",divider="gray")
