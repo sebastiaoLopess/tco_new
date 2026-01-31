@@ -26,7 +26,8 @@ opcoes = {
       "GWM SLZ": "101212128",
       "NOSSAMOTO BATURITE": "101247207",
       "NOSSAMOTO CONJUNTO CEARA": "101247174",
-      "NOSSAMOTO SIQUEIRA": "101247183"      
+      "NOSSAMOTO SIQUEIRA": "101247183",
+      "GEELY": "101258510"     
 }
 
 classificacao = {
