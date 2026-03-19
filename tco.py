@@ -4,8 +4,8 @@ import streamlit.components.v1 as components
 import pandas as pd
 import json
 from components import input 
-from data import consulta_auto_avaliar,consulta_estoque,trata_estoque,ano_garantia,tem_garantia,resposta,trata_data,consulta_revisao
-from paginas import dados_da_avaliacao,referencias_garantia, referencias, itens_avaliados
+from data import consulta_auto_avaliar,consulta_estoque,trata_estoque,ano_garantia,tem_garantia,resposta,trata_data,consulta_revisao,consulta_placa
+from paginas import dados_da_avaliacao,referencias_garantia, referencias, itens_avaliados,placa
 
 
 opcoes = {
@@ -140,6 +140,8 @@ if button and autenticator in str(cod_auth) and autenticator:
 
     #revisoes = consulta_revisao(placa)
 
+    transito_placa = consulta_placa(placa)
+
 
     #estoque = consulta_estoque(placa)
     #df_estoque = trata_estoque(estoque)
@@ -168,3 +170,17 @@ if button and autenticator in str(cod_auth) and autenticator:
 
     #st.subheader("MOVIMENTAÇÃO ESTOQUE",divider="gray")
     #st.table(df_estoque)
+
+    st.subheader("MOVIMENTAÇÃO DO VEÍCULO",divider="gray")
+    #placa(transito_placa)
+
+    cols = ['placa','direcao', 'localizacao_camera', 'transito_data']
+    st.dataframe(
+        transito_placa.rename(columns={
+            "placa": "Placa",
+            "direcao": "Direção",
+            "localizacao_camera": "Localização",
+            "transito_data": "Data do Transito"
+        })
+)
+ 

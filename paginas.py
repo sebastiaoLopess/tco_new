@@ -4,7 +4,7 @@ import streamlit.components.v1 as components
 import pandas as pd
 import json
 from components import input 
-from data import consulta_auto_avaliar,consulta_estoque,trata_estoque,ano_garantia,tem_garantia,resposta,trata_data,referencias_media,referencias_min,referencias_max,trata_itens,define_placa
+from data import consulta_auto_avaliar,consulta_estoque,trata_estoque,ano_garantia,tem_garantia,resposta,trata_data,referencias_media,referencias_min,referencias_max,trata_itens,define_placa,consulta_placa
 
 def dados_da_avaliacao(avaliacao,classificacao):
 
@@ -119,3 +119,7 @@ def referencias(avaliacao,classificacao):
 def itens_avaliados(avaliacao):
 
     st.table(trata_itens(avaliacao['items']))
+
+def placa(consulta_placa):
+
+    st.table(consulta_placa)

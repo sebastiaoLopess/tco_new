@@ -12,7 +12,7 @@ def gera_token():
     url = 'https://apps-luke-dot-autoavaliar-apps.appspot.com/ego/syncService/refreshToken'
     headers = {
         'Content-Type': 'application/json',  # Tipo de conteúdo
-        "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcHBzLWx1a2UtZG90LWF1dG9hdmFsaWFyLWFwcHMuYXBwc3BvdC5jb20iLCJpYXQiOjE3NDI3NTc2NDQsImp0aSI6IjgyN2Y3YzJhM2NhOWQzNjllYjQ0OGUyMzE3Yjg1ZjEyNzQ4NDJhMGMiLCJuYmYiOjE3NDI3NTc2NDQsImV4cCI6MTc3Mzg2MjI5NCwiZGF0YSI6eyJjb3VudHJ5X2lkIjoiNzYiLCJpbnN0YW5jZV9pZCI6MTMyNDkxLCJ0b2tlbl9pZCI6MjIyNjg2ODU1LCJ0eXBlIjoicmVmcmVzaCJ9fQ.7CVQO3Po3h7XrwjtpeL5h0R64_51-NtauTzm--e7BPE"
+        "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcHBzLXNhbmRib3guYXV0b2F2YWxpYXIuY29tLmJyIiwiaWF0IjoxNzcxMzE4ODUwLCJqdGkiOiIxOGNhZWMyYWE4M2ZiYTliZWI4MDY1N2Q5MGIwZTc2NThmZTFiZmYxIiwibmJmIjoxNzcxMzE4ODUwLCJleHAiOjE4MDI0MjM1MDAsImRhdGEiOnsiY291bnRyeV9pZCI6Ijc2IiwiaW5zdGFuY2VfaWQiOjEzMjQ5MSwidG9rZW5faWQiOjI3NDc3NTI1MiwidHlwZSI6InJlZnJlc2gifX0.K8hCmN1DcVWcizEYGLstWhJQ2EJ2hWWdgjrEIXwJGzs"
     }
 
     response = requests.post(url, headers=headers)
@@ -245,3 +245,44 @@ def consulta_revisao(placa):
     except Exception as e:
         print(f"Erro ao consultar revisão: {e}")
         return pd.DataFrame(columns=['os_dtaber', 'os_km', 'tm_ds', 'os_nr'])
+    
+
+def consulta_placa(placa):
+    url = 'http://200.194.101.205:8000/transito'
+    response = requests.get(url, params={'placa': placa})
+    try:
+        data = response.json()
+
+        # Se não houver dados, retorna DataFrame vazio com as colunas esperadas
+        if not data:
+            return pd.DataFrame(columns=['direction', 'emp_cd', 'localizacao', 'placa','transito_data','transito_id'])
+
+        df_placa = pd.DataFrame(data)
+
+        loc = {
+            '01': 'Vouga',
+            '45': 'Sanauto',
+            '40': 'Jangada Renault',
+            '37': 'BYD BS',
+            '96': 'Carmais BS',
+            '97': 'Carmais JV'
+        }
+
+        df_placa['localizacao_camera'] = df_placa['localizacao'].map(loc)
+
+        # Converte timestamp (milissegundos) para data legível
+        df_placa['transito_data'] = pd.to_datetime(df_placa['transito_data'], unit='ms', errors='coerce')
+
+        df_placa['direcao'] = df_placa['direction'].apply(lambda x: 'Saida' if x == 'S ' else 'Entrada')
+
+        df_placa = df_placa.sort_values(by='transito_data', ascending=True)
+
+        cols = ['placa','direcao', 'localizacao_camera', 'transito_data']
+
+        df_placa = df_placa[cols]
+
+        return df_placa
+
+    except Exception as e:
+        print(f"Erro ao consultar revisão: {e}")
+        return pd.DataFrame(columns=['direction', 'emp_cd', 'localizacao', 'placa','transito_data','transito_id','direcao'])
