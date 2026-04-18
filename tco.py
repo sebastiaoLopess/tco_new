@@ -140,7 +140,7 @@ if button and autenticator in str(cod_auth) and autenticator:
 
     #revisoes = consulta_revisao(placa)
 
-    transito_placa = consulta_placa(placa)
+    #transito_placa = consulta_placa(placa)
 
 
     #estoque = consulta_estoque(placa)
@@ -171,16 +171,16 @@ if button and autenticator in str(cod_auth) and autenticator:
     #st.subheader("MOVIMENTAÇÃO ESTOQUE",divider="gray")
     #st.table(df_estoque)
 
-    st.subheader("MOVIMENTAÇÃO DO VEÍCULO",divider="gray")
+    #st.subheader("MOVIMENTAÇÃO DO VEÍCULO",divider="gray")
     #placa(transito_placa)
 
-    cols = ['placa','direcao', 'localizacao_camera', 'transito_data']
-    st.dataframe(
-        transito_placa.rename(columns={
-            "placa": "Placa",
-            "direcao": "Direção",
-            "localizacao_camera": "Localização",
-            "transito_data": "Data do Transito"
-        })
-)
+    #cols = ['placa','direcao', 'localizacao_camera', 'transito_data']
+    #st.dataframe(
+        #transito_placa.rename(columns={
+            #"placa": "Placa",
+            #"direcao": "Direção",
+            #"localizacao_camera": "Localização",
+            #"transito_data": "Data do Transito"
+        #})
+#)
  
