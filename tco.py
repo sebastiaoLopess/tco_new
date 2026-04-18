@@ -182,5 +182,5 @@ if button and autenticator in str(cod_auth) and autenticator:
             #"localizacao_camera": "Localização",
             #"transito_data": "Data do Transito"
         #})
-#)
+#) 
  
