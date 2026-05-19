@@ -166,13 +166,21 @@ def resposta(questions,id_pergunta):
             break
     return resposta
 
-def referencias_media(references,id_reference):
+"""def referencias_media(references,id_reference):
     referencia = None
     for reference in references:
         if reference['id'] == id_reference:
             resposta = reference['avg_value']
             break
-    return resposta
+    return resposta"""
+
+def referencias_media(references, id_reference):
+
+    for reference in references:
+        if reference.get('id') == id_reference:
+            return reference.get('avg_value', '')
+
+    return ''
 
 def referencias_min(references,id_reference):
     referencia = ''
