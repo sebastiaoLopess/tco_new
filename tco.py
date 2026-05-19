@@ -175,7 +175,7 @@ if button and autenticator in str(cod_auth) and autenticator:
     #placa(transito_placa)
 
     #cols = ['placa','direcao', 'localizacao_camera', 'transito_data']
-    #st.dataframe(
+    #st.dataframe( 
         #transito_placa.rename(columns={
             #"placa": "Placa",
             #"direcao": "Direção",

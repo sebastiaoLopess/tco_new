@@ -242,7 +242,7 @@ def consulta_revisao(placa):
 
         return df_revisoes
 
-    except Exception as e:
+    except Exception as e: 
         print(f"Erro ao consultar revisão: {e}")
         return pd.DataFrame(columns=['os_dtaber', 'os_km', 'tm_ds', 'os_nr'])
     

@@ -120,6 +120,6 @@ def itens_avaliados(avaliacao):
 
     st.table(trata_itens(avaliacao['items']))
 
-def placa(consulta_placa):
+def placa(consulta_placa): 
 
     st.table(consulta_placa)
