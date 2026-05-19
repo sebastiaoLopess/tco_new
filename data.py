@@ -167,7 +167,7 @@ def resposta(questions,id_pergunta):
     return resposta
 
 def referencias_media(references,id_reference):
-    referencia = ''
+    referencia = None
     for reference in references:
         if reference['id'] == id_reference:
             resposta = reference['avg_value']
