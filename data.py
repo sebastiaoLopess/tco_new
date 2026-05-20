@@ -182,7 +182,7 @@ def referencias_media(references, id_reference):
 
     return ''
 
-def referencias_min(references,id_reference):
+"""def referencias_min(references,id_reference):
     referencia = ''
     for reference in references:
         if reference['id'] == id_reference:
@@ -190,16 +190,32 @@ def referencias_min(references,id_reference):
             break
     else:
         resposta = 0
-    return resposta
+    return resposta"""
+
+def referencias_min(references, id_reference):
+
+    for reference in references:
+        if reference.get('id') == id_reference:
+            return reference.get('min_value', 0)
+
+    return 0
 
 
-def referencias_max(references,id_reference):
+"""def referencias_max(references,id_reference):
     referencia = ''
     for reference in references:
         if reference['id'] == id_reference:
             resposta = reference['max_value']
             break
-    return resposta
+    return resposta"""
+
+def referencias_max(references, id_reference):
+
+    for reference in references:
+        if reference.get('id') == id_reference:
+            return reference.get('max_value', 0)
+
+    return 0
 
 def trata_itens(data):
     df = pd.json_normalize(data)
