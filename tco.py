@@ -134,53 +134,61 @@ emp_selecionada = opcoes[empresa]
 
 button = st.button("Gerar TCO", type="primary")
 
-if button and autenticator in str(cod_auth) and autenticator:
+if button:
+    placa_normalizada = placa.strip().upper() if isinstance(placa, str) else placa
+    autenticator_normalizado = autenticator.strip() if isinstance(autenticator, str) else autenticator
 
-    avaliacao = consulta_auto_avaliar(placa,emp_selecionada)
+    if autenticator_normalizado.isdigit() and int(autenticator_normalizado) in cod_auth:
+        avaliacao = consulta_auto_avaliar(placa_normalizada, emp_selecionada)
+    else:
+        st.error("Autenticador inválido.")
+        avaliacao = None
 
-    #revisoes = consulta_revisao(placa)
+    if avaliacao:
 
-    #transito_placa = consulta_placa(placa)
+        #revisoes = consulta_revisao(placa)
 
-
-    #estoque = consulta_estoque(placa)
-    #df_estoque = trata_estoque(estoque)
-    col3, col4 = st.columns(2)
-    with col3:
-        st.subheader("DADOS DA AVALIAÇÃO",divider="gray")
-
-        dados_da_avaliacao(avaliacao,classificacao)
-    with col4:
-
-        st.subheader("DADOS DE GARANTIA",divider="gray")
-
-        referencias_garantia(avaliacao,classificacao)
-
-    st.subheader("REFERÊNCIAS",divider="gray")
-
-    referencias(avaliacao,classificacao)
-
-    st.subheader("ITENS AVALIADOS",divider="gray")
-
-    itens_avaliados(avaliacao)
-
-    #st.subheader("REVISÕES",divider="gray")
-    #st.dataframe(revisoes)
+        #transito_placa = consulta_placa(placa)
 
 
-    #st.subheader("MOVIMENTAÇÃO ESTOQUE",divider="gray")
-    #st.table(df_estoque)
+        #estoque = consulta_estoque(placa)
+        #df_estoque = trata_estoque(estoque)
+        col3, col4 = st.columns(2)
+        with col3:
+            st.subheader("DADOS DA AVALIAÇÃO",divider="gray")
 
-    #st.subheader("MOVIMENTAÇÃO DO VEÍCULO",divider="gray")
-    #placa(transito_placa)
+            dados_da_avaliacao(avaliacao,classificacao)
+        with col4:
 
-    #cols = ['placa','direcao', 'localizacao_camera', 'transito_data']
-    #st.dataframe( 
-        #transito_placa.rename(columns={
-            #"placa": "Placa",
-            #"direcao": "Direção",
-            #"localizacao_camera": "Localização",
-            #"transito_data": "Data do Transito"
-        #})
-#) 
+            st.subheader("DADOS DE GARANTIA",divider="gray")
+
+            referencias_garantia(avaliacao,classificacao)
+
+        st.subheader("REFERÊNCIAS",divider="gray")
+
+        referencias(avaliacao,classificacao)
+
+        st.subheader("ITENS AVALIADOS",divider="gray")
+
+        itens_avaliados(avaliacao)
+
+        #st.subheader("REVISÕES",divider="gray")
+        #st.dataframe(revisoes)
+
+
+        #st.subheader("MOVIMENTAÇÃO ESTOQUE",divider="gray")
+        #st.table(df_estoque)
+
+        #st.subheader("MOVIMENTAÇÃO DO VEÍCULO",divider="gray")
+        #placa(transito_placa)
+
+        #cols = ['placa','direcao', 'localizacao_camera', 'transito_data']
+        #st.dataframe( 
+            #transito_placa.rename(columns={
+                #"placa": "Placa",
+                #"direcao": "Direção",
+                #"localizacao_camera": "Localização",
+                #"transito_data": "Data do Transito"
+            #})
+    #) 
  

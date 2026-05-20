@@ -66,7 +66,10 @@ def consulta_auto_avaliar(placa,empresa):
 
     token = atualiza_token()
 
-    url = 'https://apps-luke-dot-autoavaliar-apps.appspot.com//usbi/syncService/getValuation'  # Substitua pela URL do endpoint
+    placa = placa.strip().upper() if isinstance(placa, str) else placa
+    entity_id = int(empresa) if isinstance(empresa, str) and empresa.isdigit() else empresa
+
+    url = 'https://apps-luke-dot-autoavaliar-apps.appspot.com/usbi/syncService/getValuation'  # Substitua pela URL do endpoint
     headers = {
         'Content-Type': 'application/json',  # Tipo de conteúdo
         "token": token,  # Cabeçalho de autorização, se necessário
@@ -76,7 +79,7 @@ def consulta_auto_avaliar(placa,empresa):
     body = {
         "send_images": False, 
         "plate": placa, 
-        "entity_id": empresa, 
+        "entity_id": entity_id, 
         "get_tag_report": False, 
         "use_city_state_vehicle": True, 
         "use_svt": False, 
