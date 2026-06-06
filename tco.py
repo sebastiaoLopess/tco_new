@@ -27,7 +27,8 @@ opcoes = {
       "NOSSAMOTO BATURITE": "101247207",
       "NOSSAMOTO CONJUNTO CEARA": "101247174",
       "NOSSAMOTO SIQUEIRA": "101247183",
-      "GEELY": "101258510"     
+      "GEELY": "101258510",
+      "LEAP": "101262627"
 }
 
 classificacao = {
